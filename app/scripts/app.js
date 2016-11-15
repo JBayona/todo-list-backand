@@ -24,7 +24,7 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+        controller: 'TodoCtrl',
         controllerAs: 'main'
       })
       .when('/about', {
@@ -35,4 +35,9 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  //The run is a kick start of the application
+  .run(['$rootScope','$location', 'Backand', function($rootScope, $location, Backand){
+    //Backand configuration
+    Backand.setAppName('todojbayona');
+  }]);
