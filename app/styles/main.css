@@ -152,3 +152,9 @@ th{
   color: rgba(0, 0, 0, 0.4);
   padding-left: 20px;
 }
+
+.custom-align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

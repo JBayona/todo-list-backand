@@ -9,35 +9,68 @@
 
 <div style="background-color: rgb(232, 232, 232);">
   <div class="row">
-    <div class="col-md-12">
-      <div class="col-md-6" style="align-items: center;display: flex;">
+    <div class="col-md-12 custom-align">
+      <div class="col-md-5" style="align-items: center;display: flex;">
           <div class="col-md-2"><span class="span-title">Events</span></div>
           <div class="col-md-10">
             <input type="text" class="form-control floating-label" placeholder="Task" ng-model="todoTask">
           </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-2">
           <button class="btn btn-raised btn-color" ng-click="addTask()">Add New</button>
-          <button class="btn btn-raised btn-color">Sort</button>
+      </div>
+      <div class="col-md-5">
+          <input type="text" class="form-control floating-label" placeholder="Search a pending task" ng-model="searchTask">
       </div>
     </div>
   </div>   
 </div>
 <div style="background-color: white">
+  <!--Pending-->
+  <h5>Pending Tasks</h5>
   <table class="table table-hover ">
-  <thead>
-  <tr>
-    <th>#</th>
-    <th>COMPLETED</th>
-    <th>TASK</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="item in todoList">
-    <td>{{$index+1}}</td>
-    <td><input type="checkbox" ng-model="item.done"</td>
-    <td>{{item.task}}</td>
-  </tr>
-  </tbody>
-</table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th ng-click="reverse=!reverse;order('complete',reverse)">COMPLETED</th>
+      <th ng-click="reverse=!reverse;order('description',reverse)">TASK</th>
+      <th>ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in todoList | filter:searchTask">
+      <td ng-if="!item.complete">{{$index+1}}</td>
+      <td ng-if="!item.complete"><input type="checkbox" ng-disabled="!item.complete" ng-model="item.complete"</td>
+      <td ng-if="!item.complete">{{item.description}}</td>
+      <td ng-if="!item.complete">
+        <a href="javascript:void(0);" class="btn-link" ng-click="markAsComplete(item.id, true)"><i class="mdi-action-done"></i></a>&nbsp;
+        <a href="javascript:void(0);" class="btn-link" ng-click="removeTask(item.id)""><i class="mdi-action-highlight-remove"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!--Completed-->
+  <h5>Completed Tasks</h5>
+  <table class="table table-hover ">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th ng-click="reverse=!reverse;order('complete',reverse)">COMPLETED</th>
+      <th ng-click="reverse=!reverse;order('description',reverse)">TASK</th>
+      <th>ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in todoList">
+      <td ng-if="item.complete">{{$index+1}}</td>
+      <td ng-if="item.complete"><input type="checkbox" ng-disabled="!item.complete" ng-model="item.complete"</td>
+      <td ng-if="item.complete">{{item.description}}</td>
+      <td ng-if="item.complete">
+        <a href="javascript:void(0);" class="btn-link" ng-click="markAsComplete(item.id, false)"><i class="mdi-action-done"></i></a>&nbsp;
+        <a href="javascript:void(0);" class="btn-link" ng-click="removeTask(item.id)""><i class="mdi-action-highlight-remove"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>
