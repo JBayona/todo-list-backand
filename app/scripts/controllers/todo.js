@@ -13,6 +13,7 @@ angular.module('todoApp')
   	$scope.todoList = [];
   	$scope.todoCompleted = [];
   	$scope.todoIncompleted = [];
+  	$scope.isTaskIncompleted = false;
   	var orderBy = $filter('orderBy');
 
 	 $scope.todoAdd = function(){
@@ -33,6 +34,12 @@ angular.module('todoApp')
 	 	});
 	 };
 
+	 $scope.updateElement = function(taskId, description){
+	 	Todo.updateDescription(taskId, description).then(function(data){
+	 		getTasks(); //Updating the table information
+	 	});
+	 };
+
 	 $scope.removeTask = function(taskId){
 	 	Todo.deleteTask(taskId).then(function(data){
 	 		getTasks(); //Updating the table information
@@ -49,7 +56,19 @@ angular.module('todoApp')
 	 		})
 	 		console.log($scope.todoCompleted);
 	 		console.log($scope.todoIncompleted);*/
+	 		//console.log($scope.todoList);
+	 		$scope.isAnyIncompleted();
 	 	});
+	 };
+
+	 $scope.isAnyIncompleted = function(){
+	 	let isIncompleted = false;
+	 	$scope.todoList.forEach((item,index) => {
+	 		if(!item.complete){
+	 			isIncompleted = true;
+	 		}
+	 	});
+	 	$scope.isTaskIncompleted = isIncompleted;
 	 };
 
   $scope.order = function(predicate, reverse) {

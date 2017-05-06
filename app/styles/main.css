@@ -158,3 +158,8 @@ th{
   justify-content: center;
   align-items: center;
 }
+
+/*Workaorund ng-show and ng-hide*/
+.ng-hide.ng-hide-animate {
+display: none !important;
+}

@@ -13,10 +13,11 @@ angular.module('todoApp')
     var restCall = function(method,data,url,params,headers,external){
     		var defer = $q.defer();
     		var reqHeaders = external ? {} : {
-	    	//'X-Parse-Application-Id': 'AxcIKaTzkxUJhKn0BQqabnpxAB2qy4XWvt8upQ5X',
+		    	//'X-Parse-Application-Id': 'AxcIKaTzkxUJhKn0BQqabnpxAB2qy4XWvt8upQ5X',
 				//'X-Parse-REST-API-Key': '2BDNBcWYRe6u6uA82VU5qfpDpsIJNjPD1agCne0k',
 				'AnonymousToken' : 'bf256965-d625-4aa1-99a0-df0cecb2a7c2',
-		    'Content-Type':'application/json'}
+			    'Content-Type':'application/json'
+			};
 		    var req = {
 				  method: method,
 				  url: url,
@@ -25,9 +26,9 @@ angular.module('todoApp')
 				  params:params
 		  	};
 		    $http(req).
-			  success(function(data, status, headers, config) {
-			    defer.resolve(data);
-	 			}).
+			  	success(function(data, status, headers, config) {
+			    	defer.resolve(data);
+ 				}).
 	 	 		error(function(data, status, headers, config) {
 		  		defer.reject(data);
 		 		});

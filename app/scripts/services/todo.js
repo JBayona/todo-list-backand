@@ -30,6 +30,13 @@ angular.module('todoApp')
         return Proxy.putCall(param, Backand.getApiUrl() + '/1/objects/todo_list/' + id);
     };
 
+    this.updateDescription = function(id, descriptionUpdated){
+      var param = {
+        description: descriptionUpdated
+      };
+      return Proxy.putCall(param, Backand.getApiUrl() + '/1/objects/todo_list/' + id);
+    }
+
     this.deleteTask = function(id){
         return Proxy.deleteCall(Backand.getApiUrl() + '/1/objects/todo_list/' + id);
     };
