@@ -130,8 +130,6 @@ body {
 th{
   font-weight: normal;
   font-size: 12px;
-  padding-left: 24px;
-  padding-right: 24px;
   height: 56px;
   text-align: left;
   white-space: nowrap;
@@ -139,6 +137,11 @@ th{
   color: rgb(158, 158, 158);
   background-color: inherit;
   align-items: center;
+}
+
+th,td{
+  padding-left: 24px !important;
+  padding-right: 24px !important;
 }
 
 .span-title{
